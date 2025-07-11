@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { ClerkProvider } from "@clerk/nextjs";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+// const bricolage = Bricolage_Grotesque({
+//   variable: "--font-bricolage",
+//   subsets: ["latin"],
+// });
+
+const roboto = Roboto({
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-roboto",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -20,9 +28,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bricolage.variable} antialiased`}>
-        <Navbar />
-        {children}
+      <body className={`${roboto.variable} antialiased`}>
+        <ClerkProvider appearance={{ variables: { colorPrimary: "#fe5933" } }}>
+          <Navbar />
+          {children}
+        </ClerkProvider>
       </body>
     </html>
   );
